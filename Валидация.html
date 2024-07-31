@@ -70,18 +70,25 @@
   <script>
       document.getElementById('loginForm').addEventListener('submit', function(event) {
           event.preventDefault(); 
-          const formElement = document.getElementById('loginForm');
-          const formData = new FormData(formElement);
-          const email = formData.get('email');
-          const name = formData.get('name');
-          const password = formData.get('password');
-          const gender = formData.get('gender');
+          
+          const email = this.email.value;
+          const name = this.name.value;
+          const password = this.password.value;
+          const gender = this.gender.value;
 
+          const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+          if (!email.match(emailPattern)) {
+              alert('Пожалуйста, введите корректный email.');
+              return;
+          }
+          if (password.length < 6) {
+              alert('Пароль должен содержать как минимум 6 символов.');
+              return;
+          }
           console.log('Email:', email);
           console.log('Имя:', name);
           console.log('Пароль:', password);
           console.log('Пол:', gender);
-
           alert('Форма отправлена!');
       });
   </script>
